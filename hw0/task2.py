@@ -3,29 +3,25 @@
 # English Name              : Calvin Liusnando
 # Chinese Name (optional)   : 劉益瑋
 
-
 # Import packages here
 import numpy as np
 from sklearn.linear_model import LinearRegression
 
 class Predictor:
-    def __init__(self, dataset_path='salary_data.csv'):
+    def __init__(self, dataset_path='data1.csv'):
         self.test = 0
         self.dataset_data, self.dataset_target = self.read_csv(dataset_path)
         self.model = self.train()
 
     @staticmethod
-    def read_csv(file_path='salary_data.csv'):
+    def read_csv(file_path='data1.csv'):
         # Implement your CSV file reading here
         # returns data, target
         # Both outputs should be in numpy array format with type np.float64
         # You may reshape the array if necessary
         # raise NotImplementedError
-        dataset = np.genfromtxt(file_path,delimiter=',',dtype=np.float64,skip_header=1)
-        X = (dataset[:,0]).reshape((-1,1))
-        X.dtype = np.float64
-        y = (dataset[:,1].reshape((-1,1)))
-        y.dtype = np.float64
+        X = np.genfromtxt(file_path, dtype=np.float64, delimiter=',', usecols=0, names=True).reshape(-1, 1)
+        y = np.genfromtxt(file_path, dtype=np.float64, delimiter=',', usecols=1, names=True).reshape(-1, 1)
         return X, y
 
     def train(self):
@@ -38,7 +34,7 @@ class Predictor:
     def predict(self, x):
         # returns model's prediction given x as input
         #raise NotImplementedError
-        return self.train(self).predict(x)
+        return self.model().predict(x)
 
     def write_prediction(self, x, write_path='prediction.txt'):
         # opens a file using write_path with a writeable access
@@ -47,18 +43,12 @@ class Predictor:
         # This method does not return anything
         # raise NotImplementedError
         file = open(write_path, "w")
-        for i in self.predict(self, x):
-            file.write(str(format(i, '.2f'))+'\n')
-        file.close()
+        prediction = self.predict(x)
+        for i in prediction:
+           print('{:.2f}'.format(i[0], file = file)
         return
 
 
 if __name__ == '__main__':
     # You may test your program here
     # Anything residing in this block will not be graded
-    print("Good luck!")
-    p = Predictor
-    tst = np.zeros(5).reshape(-1,1)
-    for i in range(0,5):
-    	tst[i][0] = 20-i
-    p.write_prediction(p, tst) 
