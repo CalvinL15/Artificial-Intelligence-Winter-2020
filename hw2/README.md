@@ -1,6 +1,6 @@
 # HW2 of Artificial Intelligence Course
 
-## It is another assignmen based on the classic Berkeley CS188 course: implementation of reflex agent, minimax, AB-pruning and expectimax.
+## It is another assignment based on the classic Berkeley CS188 course: an implementation of reflex agent, minimax, AB-pruning and expectimax.
 
 In this repo, only the edited file is provided.
 
